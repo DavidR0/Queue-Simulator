@@ -1,13 +1,19 @@
 package org.int32_t.models;
 
 public class Settings {
-    private static int nrClients = 12;
-    private static int nrQueues = 4;
-    private static int SimInterval = 10;
-    private static int minArrivalTime = 1;
-    private static int maxArrivalTime = 5;
-    private static int minServiceTime = 1;
-    private static int maxServiceTime = 5;
+    private static int nrClients = 20;
+    private static int nrQueues = 2;
+    private static int SimInterval = 20;
+    private static int minArrivalTime = 2;
+    private static int maxArrivalTime = 7;
+    private static int minServiceTime = 2;
+    private static int maxServiceTime = 3;
+
+    public static int getSleepTime() {
+        return sleepTime;
+    }
+
+    private static final int sleepTime = 1000;
 
     public int getNrClients() {
         return nrClients;

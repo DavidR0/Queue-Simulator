@@ -24,7 +24,7 @@ public class ViewController {
     private HBox availableClients;
 
     private static Settings settings = new Settings();
-    private static List<QueueComponent> queuesComponentsList = new LinkedList<>();
+    private static List<QueueComponent> queuesComponentsList = new LinkedList<>(); //Should we use some sorta multi thread list here?
     private static List<ClientComponent> clientComponentsList = new LinkedList<>();
 
 
@@ -54,8 +54,8 @@ public class ViewController {
         queues.getChildren().clear();
 
         SimulationController simulationController = new SimulationController();
-        Thread simContrl = new Thread(simulationController);
-        simContrl.start();
+        Thread simThread = new Thread(simulationController);
+        simThread.start();
 
         //Create a task on the JavaFX thread so that we update the view every X-ms
         Task task = new Task<Void>() {

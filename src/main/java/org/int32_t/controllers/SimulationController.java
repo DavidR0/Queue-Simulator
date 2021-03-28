@@ -3,26 +3,45 @@ package org.int32_t.controllers;
 import javafx.application.Platform;
 import org.int32_t.models.Client;
 import org.int32_t.models.Settings;
-import java.util.LinkedList;
-import java.util.List;
+import org.int32_t.utils.Scheduler;
+import org.int32_t.utils.Server;
+
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SimulationController implements Runnable{
     Settings settings = new Settings();
+    private Scheduler scheduler;
+    private final String selectionPolicy = "Time";
+    private List<Client> clients;
 
-    public SimulationController() {}
+    public SimulationController() {
+        scheduler = new Scheduler(settings);
+        scheduler.changeStrategy(selectionPolicy);
+        clients = Collections.synchronizedList(createClientList());
+        Platform.runLater(() -> ViewController.updateViewData(makeViewData()));
+    }
 
     @Override
     public void run() {
         int currentTime = 0;
         while(currentTime < settings.getSimInterval()){
+            //Send tasks with current time to dispatcher
+            Iterator<Client> iter = clients.iterator();
+            while (iter.hasNext()) {
+                Client c = iter.next();
+                if(c.getArrivalTime() == currentTime){
+                    scheduler.dispatchClient(c);
+                    iter.remove();
+                }
+            }
+
+            //Update UI Data
+            Platform.runLater(() -> ViewController.updateViewData(makeViewData()));
+
             //TimeRelated stuff
             System.out.println("Current time interval : " + currentTime);
             currentTime++;
-
-            //Update UI Data
-            Platform.runLater(() -> ViewController.updateViewData(createClientList()));
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -31,15 +50,24 @@ public class SimulationController implements Runnable{
         }
     }
 
-    private List<Client> createClientList(){ //TODO make this from the blocking queue, and not fake data
+    private List<Client> createClientList(){
         List<Client> clientList = new LinkedList<>();
-        for(int i = 0; i < 20; ++i){
-            if(ThreadLocalRandom.current().nextInt(settings.getMinArrivalTime(), settings.getMaxArrivalTime())%2==0) {
+        for(int i = 1; i <= settings.getNrClients(); ++i){
                 clientList.add(new Client(i, ThreadLocalRandom.current().nextInt(settings.getMinArrivalTime(), settings.getMaxArrivalTime()), ThreadLocalRandom.current().nextInt(settings.getMinServiceTime(), settings.getMaxServiceTime())));
-            }else{
-                clientList.add(new Client(i, ThreadLocalRandom.current().nextInt(settings.getMinArrivalTime(), settings.getMaxArrivalTime()), ThreadLocalRandom.current().nextInt(settings.getMinServiceTime(), settings.getMaxServiceTime()), i % settings.getNrQueues()));
-            }
         }
+        //Sort the clients with respect to Arrival Time
+        clientList.sort(Comparator.comparingInt(Client::getArrivalTime));
+
+        return  clientList;
+    }
+
+    private List<Client> makeViewData(){
+        List<Client> clientList = new LinkedList<>();
+        List<Server> servers = scheduler.getServers();
+        for(Server s : servers){
+            clientList.addAll(s.getClients());
+        }
+        clientList.addAll(clients);
         return  clientList;
     }
 }
