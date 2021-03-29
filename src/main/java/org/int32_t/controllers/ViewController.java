@@ -83,13 +83,13 @@ public class ViewController {
     }
 
     public void ConfigDialog(){
-        JFXDialog dialog = new JFXDialog(root, new ConfigDialog(settings), JFXDialog.DialogTransition.CENTER);
+        ConfigDialog diag = new ConfigDialog(settings);
+        JFXDialog dialog = new JFXDialog(root, diag, JFXDialog.DialogTransition.CENTER);
+        diag.setDiag(dialog);
         dialog.show();
-
     }
 
     public void AnalyticsDialog(){
         JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(), JFXDialog.DialogTransition.CENTER);
-        dialog.show();
     }
 }
