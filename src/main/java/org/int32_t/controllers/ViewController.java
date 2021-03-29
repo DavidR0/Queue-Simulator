@@ -1,5 +1,7 @@
 package org.int32_t.controllers;
 
+import com.jfoenix.controls.JFXBadge;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -22,6 +24,15 @@ public class ViewController {
 
     @FXML
     private HBox availableClients;
+
+    @FXML
+    private JFXButton startSimulation;
+
+    @FXML
+    private JFXButton ConfigDialog;
+
+    @FXML
+    private JFXButton AnalyticsDialog;
 
     private static Settings settings = new Settings();
     private static List<QueueComponent> queuesComponentsList = new LinkedList<>(); //Should we use some sorta multi thread list here?
@@ -62,6 +73,9 @@ public class ViewController {
             @Override
             public Void call() throws Exception {
                 int simulationTime = 0;
+                startSimulation.setDisable(true);
+                ConfigDialog.setDisable(true);
+                AnalyticsDialog.setDisable(true);
                 while (simulationTime < settings.getSimInterval() * 4) {
                     Platform.runLater(() -> {
                         queues.getChildren().clear();
@@ -72,6 +86,10 @@ public class ViewController {
                     Thread.sleep(250);
                     simulationTime++;
                 }
+                startSimulation.setDisable(false);
+                ConfigDialog.setDisable(false);
+                AnalyticsDialog.setDisable(false);
+
                 System.out.println("UI not updating dynamically anymore");
                 return null;
             }
@@ -91,5 +109,6 @@ public class ViewController {
 
     public void AnalyticsDialog(){
         JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(), JFXDialog.DialogTransition.CENTER);
+        dialog.show();
     }
 }
