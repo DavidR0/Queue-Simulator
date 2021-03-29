@@ -936,6 +936,12 @@ VBox > .split-menu-button.last > .arrow-button {
  ******************************************************************************/
 .m-card{
     -fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 15, 0.1, 0, 5);
-    -fx-background-color: #ffffff;
+    -fx-background-color: #EFEFEF;
+    -fx-background-radius: 6;
+}
+
+.m-card-client{
+    -fx-effect: dropshadow(gaussian, rgb(200, 200, 200), 15, 0.1, 0, 5);
+    -fx-background-color: #EFEFEF;
     -fx-background-radius: 6;
 }

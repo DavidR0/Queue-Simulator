@@ -2,23 +2,49 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="100.0" prefWidth="783.0" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="1500.0" prefHeight="120.0" prefWidth="1200.0" style="-fx-background-color: #EBECF0; -fx-background-radius: 8px;" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="m-card" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox prefHeight="100.0" style="-fx-background-color: #EBECF0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="title" prefHeight="111.0" prefWidth="80.0" text="Label">
+            <Label fx:id="title" prefHeight="111.0" prefWidth="80.0" style="-fx-background-color: #EBECF0;" text="Label">
                <padding>
                   <Insets left="3.0" right="3.0" />
                </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Label>
-            <HBox fx:id="clients" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <HBox fx:id="clients" alignment="CENTER_LEFT" fillHeight="false" spacing="15.0" style="-fx-background-color: #EBECF0;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets left="8.0" right="8.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></HBox>
          </children>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="3.0" left="5.0" top="3.0" />
+      <Insets left="8.0" right="8.0" />
    </padding>
+   <effect>
+      <DropShadow height="10.0" offsetX="6.0" offsetY="6.0" radius="4.5" width="10.0">
+         <color>
+            <Color red="0.5641447305679321" green="0.6393640637397766" blue="0.6447368264198303" opacity="0.6499999761581421" />
+         </color>
+         <input>
+            <DropShadow offsetX="-6.0" offsetY="-6.0">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </input>
+      </DropShadow>
+   </effect>
 </fx:root>

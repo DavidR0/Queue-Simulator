@@ -2,14 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="112.0" prefWidth="97.0" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root mouseTransparent="true" prefHeight="81.0" prefWidth="99.0" style="-fx-background-color: #EBECF0; -fx-background-radius: 8px;" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="166.0" layoutY="88.0" prefHeight="129.0" prefWidth="189.0" styleClass="m-card" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fillWidth="false" layoutX="166.0" layoutY="88.0" maxHeight="50.0" maxWidth="50.0" prefHeight="50.0" prefWidth="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="clientTitle" prefHeight="39.0" prefWidth="207.0" text="Client " textAlignment="CENTER">
+            <Label fx:id="clientTitle" prefHeight="39.0" prefWidth="207.0" text="Client " textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <opaqueInsets>
                   <Insets top="2.0" />
                </opaqueInsets>
@@ -19,8 +22,11 @@
                <padding>
                   <Insets left="5.0" />
                </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Label>
-            <Label fx:id="arrival" prefHeight="28.0" prefWidth="216.0" text="Arrival : ">
+            <Label fx:id="arrival" prefHeight="28.0" prefWidth="216.0" text="Arrival : " textOverrun="CENTER_ELLIPSIS">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -28,14 +34,31 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <Label fx:id="service" prefHeight="33.0" prefWidth="189.0" text="Service :">
+            <Label fx:id="service" prefHeight="33.0" prefWidth="189.0" text="Service :" textOverrun="CENTER_ELLIPSIS">
                <padding>
                   <Insets left="5.0" />
                </padding></Label>
          </children>
       </VBox>
    </children>
+   <effect>
+      <DropShadow height="10.0" offsetX="6.0" offsetY="6.0" radius="4.5" spread="0.29" width="10.0">
+         <color>
+            <Color red="0.3417397737503052" green="0.39722222089767456" blue="0.43421053886413574" opacity="0.6000000238418579" />
+         </color>
+         <input>
+            <DropShadow offsetX="-6.0" offsetY="-6.0">
+               <color>
+                  <Color red="1.0" green="1.0" blue="1.0" />
+               </color>
+            </DropShadow>
+         </input>
+      </DropShadow>
+   </effect>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
    <padding>
-      <Insets bottom="5.0" left="3.0" right="3.0" top="5.0" />
+      <Insets left="2.0" />
    </padding>
 </fx:root>

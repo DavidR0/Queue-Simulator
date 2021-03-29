@@ -8,6 +8,7 @@ import org.int32_t.utils.Server;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimulationController implements Runnable{
     Settings settings = new Settings();
@@ -19,11 +20,12 @@ public class SimulationController implements Runnable{
         scheduler = new Scheduler(settings);
         scheduler.changeStrategy(selectionPolicy);
         clients = Collections.synchronizedList(createClientList());
-        Platform.runLater(() -> ViewController.updateViewData(makeViewData()));
+        Platform.runLater(() -> ViewController.updateViewData(makeViewData(),0));
     }
 
     @Override
     public void run() {
+//        AtomicInteger currentTime = new AtomicInteger(0);
         int currentTime = 0;
         while(currentTime < settings.getSimInterval()){
             //Send tasks with current time to dispatcher
@@ -37,7 +39,8 @@ public class SimulationController implements Runnable{
             }
 
             //Update UI Data
-            Platform.runLater(() -> ViewController.updateViewData(makeViewData()));
+            int finalCurrentTime = currentTime;
+            Platform.runLater(() -> ViewController.updateViewData(makeViewData(), finalCurrentTime));
 
             //TimeRelated stuff
             System.out.println("Current time interval : " + currentTime);
@@ -48,6 +51,8 @@ public class SimulationController implements Runnable{
                 e.printStackTrace();
             }
         }
+        //Clear old threads?
+
     }
 
     private List<Client> createClientList(){

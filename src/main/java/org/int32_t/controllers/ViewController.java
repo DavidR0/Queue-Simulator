@@ -9,8 +9,11 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.int32_t.models.Client;
 import org.int32_t.models.Settings;
+
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,13 +37,17 @@ public class ViewController {
     @FXML
     private JFXButton AnalyticsDialog;
 
+    @FXML
+    private Text simulationTime;
+
     private static Settings settings = new Settings();
     private static List<QueueComponent> queuesComponentsList = new LinkedList<>(); //Should we use some sorta multi thread list here?
     private static List<ClientComponent> clientComponentsList = new LinkedList<>();
+    private static int simtime;
 
 
-    public static void updateViewData(List<Client> clientList){
-
+    public static void updateViewData(List<Client> clientList, int time){
+        simtime = time;
         queuesComponentsList.clear();
         clientComponentsList.clear();
 
@@ -72,19 +79,21 @@ public class ViewController {
         Task task = new Task<Void>() {
             @Override
             public Void call() throws Exception {
-                int simulationTime = 0;
+                int simTime = 0;
                 startSimulation.setDisable(true);
                 ConfigDialog.setDisable(true);
                 AnalyticsDialog.setDisable(true);
-                while (simulationTime < settings.getSimInterval() * 4) {
+                while (simTime < settings.getSimInterval() * 4) {
                     Platform.runLater(() -> {
                         queues.getChildren().clear();
                         availableClients.getChildren().clear();
                         queues.getChildren().addAll(queuesComponentsList);
                         availableClients.getChildren().addAll(clientComponentsList);
+
+                        simulationTime.setText(String.valueOf(simtime + 1));
                     });
                     Thread.sleep(250);
-                    simulationTime++;
+                    simTime++;
                 }
                 startSimulation.setDisable(false);
                 ConfigDialog.setDisable(false);
