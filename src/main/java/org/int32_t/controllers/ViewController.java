@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 import org.int32_t.models.Client;
 import org.int32_t.models.Settings;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,6 +43,7 @@ public class ViewController {
     private static List<QueueComponent> queuesComponentsList = new LinkedList<>(); //Should we use some sorta multi thread list here?
     private static List<ClientComponent> clientComponentsList = new LinkedList<>();
     private static int simtime;
+    private static float avgWait;
 
 
     public static void updateViewData(List<Client> clientList, int time){
@@ -98,7 +98,7 @@ public class ViewController {
                 startSimulation.setDisable(false);
                 ConfigDialog.setDisable(false);
                 AnalyticsDialog.setDisable(false);
-
+                avgWait = simulationController.calculateAverageWaitTime();
                 System.out.println("UI not updating dynamically anymore");
                 return null;
             }
@@ -117,7 +117,7 @@ public class ViewController {
     }
 
     public void AnalyticsDialog(){
-        JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(), JFXDialog.DialogTransition.CENTER);
+        JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(avgWait), JFXDialog.DialogTransition.CENTER);
         dialog.show();
     }
 }

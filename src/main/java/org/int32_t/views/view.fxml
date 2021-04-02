@@ -143,7 +143,10 @@
                      <effect>
                         <DropShadow offsetX="-6.0" offsetY="-6.0">
                            <input>
-                              <DropShadow />
+                              <DropShadow offsetX="6.0" offsetY="6.0">
+                                 <color>
+                                    <Color red="0.47450000047683716" green="0.631288468837738" blue="0.6499999761581421" opacity="0.44999998807907104" />
+                                 </color></DropShadow>
                            </input>
                            <color>
                               <Color red="1.0" green="1.0" blue="1.0" />

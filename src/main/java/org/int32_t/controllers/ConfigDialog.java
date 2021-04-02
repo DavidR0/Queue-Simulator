@@ -37,7 +37,7 @@ public class ConfigDialog extends AnchorPane {
         nrClients.setPromptText("Number of Clients (Current: " + settings.getNrClients() +" )");
         nrQueues.setPromptText("Number of Queues (Current: " + settings.getNrQueues() +" )");
         simInterval.setPromptText("Simulation Interval (Current: " + settings.getSimInterval() +" )");
-        minArrivalTime.setPromptText("Minimum Arrival Time (Current: " + settings.getSimInterval() +" )");
+        minArrivalTime.setPromptText("Minimum Arrival Time (Current: " + settings.getMinArrivalTime() +" )");
         minServiceTime.setPromptText("Minimum Service Time (Current: " + settings.getMinServiceTime() +" )");
         maxArrivalTime.setPromptText("Maximum Arrival Time (Current: " + settings.getMaxArrivalTime() +" )");
         maxServiceTime.setPromptText("Maximum Service Time (Current: " + settings.getMaxServiceTime() +" )");
