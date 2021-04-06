@@ -10,14 +10,17 @@ public class Scheduler {
     Strategy strategy;
     Settings settings;
     private List<Server> servers;
+    private List<Thread> serverThreads;
 
     public Scheduler(Settings settings){
         this.settings = settings;
-            servers = new LinkedList<>();
+        servers = new LinkedList<>();
+        serverThreads = new LinkedList<>();
 
         for(int i = 0; i < settings.getNrQueues(); ++i){
             Server buff = new Server(i);
             Thread t = new Thread(buff);
+            serverThreads.add(t);
             t.start();
             servers.add(buff);
         }
@@ -37,4 +40,5 @@ public class Scheduler {
     public List<Server> getServers(){
         return servers;
     }
+    public List<Thread> getServerThreads(){return serverThreads;}
 }

@@ -130,7 +130,21 @@
                         <Insets />
                      </opaqueInsets>
                      <buttons>
-                        <JFXButton fx:id="AnalyticsDialog" buttonType="RAISED" onAction="#AnalyticsDialog" text="Analytics" />
+                        <JFXButton fx:id="AnalyticsDialog" buttonType="RAISED" onAction="#AnalyticsDialog" text="Analytics">
+                           <effect>
+                              <DropShadow offsetX="6.0" offsetY="6.0">
+                                 <input>
+                                    <DropShadow offsetX="-6.0" offsetY="-6.0">
+                                       <color>
+                                          <Color red="1.0" green="1.0" blue="1.0" />
+                                       </color>
+                                    </DropShadow>
+                                 </input>
+                                 <color>
+                                    <Color red="0.5930190086364746" green="0.7236841917037964" blue="0.7215064764022827" />
+                                 </color>
+                              </DropShadow>
+                           </effect></JFXButton>
                         <JFXButton fx:id="ConfigDialog" buttonType="RAISED" onAction="#ConfigDialog" text="Configuration" />
                         <JFXButton fx:id="startSimulation" buttonType="RAISED" onAction="#startSimulation" text="Start Simulation" />
                      </buttons>

@@ -73,7 +73,11 @@ public class SimulationController implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //Clear old threads?
+        //Clear old threads
+        List<Thread> threads = scheduler.getServerThreads();
+        for(Thread t : threads){
+            t.interrupt();
+        }
     }
 
     private String getLogTxt(int time){

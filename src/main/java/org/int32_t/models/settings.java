@@ -9,6 +9,12 @@ public class Settings {
     private static int minServiceTime = 2;
     private static int maxServiceTime = 3;
 
+    public static String getFileName() {
+        return fileName;
+    }
+
+    private static final String fileName = "log.txt";
+
     public static int getSleepTime() {
         return sleepTime;
     }
