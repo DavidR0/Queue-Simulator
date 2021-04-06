@@ -14,6 +14,7 @@ public class Server implements Runnable{
     private AtomicInteger waitingPeriod;
     private int serverID;
     private int totalWaitTime;
+    private int totalServiceTime;
     private int nrClientsProcessed;
 
     public Server(int ID){
@@ -55,7 +56,7 @@ public class Server implements Runnable{
     public int getTotalWaitTime(){
         return totalWaitTime;
     }
-
+    public int getTotalServiceTime(){return totalServiceTime;}
     public int getNrClientsProcessed(){
         return  nrClientsProcessed;
     }
@@ -70,8 +71,8 @@ public class Server implements Runnable{
                     nrClientsProcessed++;
                     totalWaitTime += clients.peek().getTimeSpentInQueue();
                     clients.remove();
-
                 }
+                totalServiceTime++; //Increase the service time
             }
 
             try {

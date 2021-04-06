@@ -17,6 +17,9 @@ public class SimulationController implements Runnable{
     private Scheduler scheduler;
     private final String selectionPolicy = "Time";
     private List<Client> clients;
+    private int peakHour = 0;
+    private int peakHourClients = 0;
+
 
     public SimulationController() {
         scheduler = new Scheduler(settings);
@@ -57,6 +60,11 @@ public class SimulationController implements Runnable{
                 e.printStackTrace();
             }
 
+            int buff = getAllClientsInQueue();
+            if(buff > peakHourClients){
+                peakHourClients = buff;
+                peakHour = currentTime;
+            }
             //TimeRelated stuff
 //            System.out.println("Current time interval : " + currentTime);
             currentTime++;
@@ -67,7 +75,9 @@ public class SimulationController implements Runnable{
             }
         }
         try {
-            myWriter.write("Average wait time: " + calculateAverageWaitTime());
+            myWriter.write("Average wait time: " + calculateAverageWaitTime() + "\n");
+            myWriter.write("Average service time: " + calculateAverageServiceTime() + "\n");
+            myWriter.write("Peak hour is: " + peakHour + "\nHaving " + peakHourClients + " Waiting clients " + "\n");
             myWriter.close();
             System.out.println("File Closed.");
         } catch (IOException e) {
@@ -124,6 +134,14 @@ public class SimulationController implements Runnable{
         return null;
     }
 
+    int getAllClientsInQueue(){
+        int nr = 0;
+        List<Server> servers = scheduler.getServers();
+        for(Server s : servers){
+            nr += s.getNrClients();
+        }
+        return nr;
+    }
 
     private List<Client> createClientList(){
         List<Client> clientList = new LinkedList<>();
@@ -143,9 +161,25 @@ public class SimulationController implements Runnable{
             totalTime += s.getTotalWaitTime();
             totalClients += s.getNrClientsProcessed();
         }
-        return totalTime/totalClients;
+        return (float)totalTime/totalClients;
+    }
+    public float calculateAverageServiceTime(){
+        int totalTime = 0, totalClients = 0;
+        List<Server> servers = scheduler.getServers();
+        for(Server s : servers){
+            totalTime += s.getTotalServiceTime();
+            totalClients += s.getNrClientsProcessed();
+        }
+        return (float)totalTime/totalClients;
     }
 
+    public int getPeakHour(){
+        return peakHour;
+    }
+
+    public int getPeakHourClients(){
+        return peakHourClients;
+    }
     private List<Client> makeViewData(){
         List<Client> clientList = new LinkedList<>();
         List<Server> servers = scheduler.getServers();
