@@ -75,6 +75,7 @@ public class SimulationController implements Runnable{
             }
         }
         try {
+            //Try to write into the file some statistics
             myWriter.write("Average wait time: " + calculateAverageWaitTime() + "\n");
             myWriter.write("Average service time: " + calculateAverageServiceTime() + "\n");
             myWriter.write("Peak hour is: " + peakHour + "\nHaving " + peakHourClients + " Waiting clients " + "\n");
@@ -90,6 +91,7 @@ public class SimulationController implements Runnable{
         }
     }
 
+    //append what happened in 1 sec
     private String getLogTxt(int time){
         String buff = "Time "  + time + "\nWaiting clients: ";
 
@@ -117,7 +119,7 @@ public class SimulationController implements Runnable{
     }
 
 
-
+    //Try to create the log file
     public File createFile() {
         try {
             File myObj = new File(settings.getFileName());
@@ -134,6 +136,7 @@ public class SimulationController implements Runnable{
         return null;
     }
 
+    //See how many clients are waiting in the queues
     int getAllClientsInQueue(){
         int nr = 0;
         List<Server> servers = scheduler.getServers();
@@ -143,6 +146,7 @@ public class SimulationController implements Runnable{
         return nr;
     }
 
+    //Generate the clients randomly
     private List<Client> createClientList(){
         List<Client> clientList = new LinkedList<>();
         for(int i = 1; i <= settings.getNrClients(); ++i){
@@ -163,6 +167,7 @@ public class SimulationController implements Runnable{
         }
         return (float)totalTime/totalClients;
     }
+
     public float calculateAverageServiceTime(){
         int totalTime = 0, totalClients = 0;
         List<Server> servers = scheduler.getServers();
@@ -180,6 +185,7 @@ public class SimulationController implements Runnable{
     public int getPeakHourClients(){
         return peakHourClients;
     }
+    //Create the data that is sent to the UI
     private List<Client> makeViewData(){
         List<Client> clientList = new LinkedList<>();
         List<Server> servers = scheduler.getServers();

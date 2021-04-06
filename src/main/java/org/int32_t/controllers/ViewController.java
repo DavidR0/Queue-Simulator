@@ -46,6 +46,7 @@ public class ViewController {
     private static float avgWait;
     private static float avgService;
     private static int peakHour;
+    private static int peakHourClients;
 
 
     public static void updateViewData(List<Client> clientList, int time){
@@ -103,6 +104,7 @@ public class ViewController {
                 avgWait = simulationController.calculateAverageWaitTime();
                 avgService = simulationController.calculateAverageServiceTime();
                 peakHour = simulationController.getPeakHour();
+                peakHourClients = simulationController.getPeakHourClients();
                 System.out.println("UI not updating dynamically anymore");
                 return null;
             }
@@ -121,7 +123,7 @@ public class ViewController {
     }
 
     public void AnalyticsDialog(){
-        JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(avgWait,avgService,peakHour), JFXDialog.DialogTransition.CENTER);
+        JFXDialog dialog = new JFXDialog(root, new AnalyticsDialog(avgWait,avgService,peakHour,peakHourClients), JFXDialog.DialogTransition.CENTER);
         dialog.show();
     }
 }

@@ -16,9 +16,11 @@ public class AnalyticsDialog extends AnchorPane {
     private Text avgServiceTime;
     @FXML
     private Text peakHour;
+    @FXML
+    private Text peakHourClients;
 
 
-    public AnalyticsDialog(float avgTime,float avgServiceTime,int peakHour){
+    public AnalyticsDialog(float avgTime,float avgServiceTime,int peakHour,int peakHourClients){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/AnalyticsDialog.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -28,9 +30,10 @@ public class AnalyticsDialog extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        this.avgTime.setText(String.valueOf(avgTime));
-        this.avgServiceTime.setText(String.valueOf(avgServiceTime));
+        //Set the values in the view
+        this.avgTime.setText(String.valueOf(String.format("%.2f", avgTime)));
+        this.avgServiceTime.setText(String.valueOf(String.format("%.2f", avgServiceTime)));
         this.peakHour.setText(String.valueOf(peakHour));
+        this.peakHourClients.setText(String.valueOf(peakHourClients));
     }
 }

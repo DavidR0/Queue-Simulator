@@ -29,7 +29,7 @@ public class ClientComponent extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
+        //Set the values for the component
         clientTitle.setText("Client ID : " + String.valueOf(client.getClientId()));
         arrival.setText("Arrival : " + String.valueOf(client.getArrivalTime()));
         service.setText("Service : " + String.valueOf(client.getServiceTime()));

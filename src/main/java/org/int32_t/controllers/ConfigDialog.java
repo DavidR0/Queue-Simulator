@@ -4,11 +4,9 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Dialog;
 import javafx.scene.layout.AnchorPane;
 import org.int32_t.models.Settings;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class ConfigDialog extends AnchorPane {

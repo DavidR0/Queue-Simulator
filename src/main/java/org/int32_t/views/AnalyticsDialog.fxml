@@ -36,5 +36,15 @@
             <Font size="36.0" />
          </font>
       </Text>
+      <Text layoutX="14.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Peak hour is :" wrappingWidth="360.388671875">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="peakHourClients" layoutX="14.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="111.13671875">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
    </children>
 </fx:root>
