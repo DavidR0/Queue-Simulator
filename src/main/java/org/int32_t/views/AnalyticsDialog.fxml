@@ -36,7 +36,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Peak hour is :" wrappingWidth="360.388671875">
+      <Text layoutX="14.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Peak hour number of clients :" wrappingWidth="360.388671875">
          <font>
             <Font size="27.0" />
          </font>
